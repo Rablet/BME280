@@ -1,12 +1,27 @@
 # BME280
 
-Library for reading a BME280 sensor using pi4j2.
+Library for reading a BME280 sensor on a Raspberry Pi.
+
+Uses pi4j2 under the hood (https://github.com/Pi4J/pi4j-v2).
+
+Prerequisites:
+
+- Raspberry Pi
+- BME280 sensor
+- i2c enabled on Raspberry Pi (sudo raspi-config -> Interface Options -> I2C -> Yes)
 
 This is very heavily based on this with the main change being an upgrade to pi4j2: https://github.com/ControlEverythingCommunity/BME280/blob/master/Java/BME280.java
 
 ## How to use?
 
 1.  Add the library as a dependency
+
+        <dependency>
+            <groupId>dev.rablet</groupId>
+            <artifactId>bme280</artifactId>
+            <version>0.0.1</version>
+        </dependency>
+
 2.  Find the i2cAddress of your BME280 sensor (below shows an example for 0x76):
 
         $ i2cdetect -y 1
