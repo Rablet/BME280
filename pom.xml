@@ -7,9 +7,31 @@
   <artifactId>bme280</artifactId>
   <version>0.0.1</version>
 
-  <name>bme280</name>
-  <!-- FIXME change it to the project's website -->
-  <url>http://www.example.com</url>
+  <name>${project.groupId}:${project.artifactId}</name>
+  <description>A library for reading data from a BME280 sensor</description>
+  <url>https://github.com/Rablet/BME280</url>
+
+  <licenses>
+    <license>
+      <name>Apache License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+
+  <developers>
+    <developer>
+      <name>Robin</name>
+      <email>hi@rablet.dev</email>
+      <organizationUrl>https://github.com/Rablet/BME280</organizationUrl>
+    </developer>
+  </developers>
+
+  <scm>
+    <connection>scm:git:git://github.com/Rablet/BME280.git</connection>
+    <developerConnection>scm:git:ssh://github.com:Rablet/BME280.git</developerConnection>
+    <url>https://github.com/Rablet/BME280</url>
+  </scm>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -28,6 +50,18 @@
       <version>2.1.1</version>
     </dependency>
   </dependencies>
+
+
+  <distributionManagement>
+    <snapshotRepository>
+      <id>ossrh</id>
+      <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
+    </snapshotRepository>
+    <repository>
+      <id>ossrh</id>
+      <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+    </repository>
+  </distributionManagement>
 
   <build>
     <pluginManagement>
@@ -76,6 +110,31 @@
       </plugins>
     </pluginManagement>
     <plugins>
+      <plugin>
+        <groupId>org.sonatype.plugins</groupId>
+        <artifactId>nexus-staging-maven-plugin</artifactId>
+        <version>1.6.13</version>
+        <extensions>true</extensions>
+        <configuration>
+          <serverId>ossrh</serverId>
+          <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
+          <autoReleaseAfterClose>true</autoReleaseAfterClose>
+        </configuration>
+      </plugin>
+      <!-- INCLUDE SOURCE JAR -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <version>3.2.1</version>
+        <executions>
+          <execution>
+            <id>attach-sources</id>
+            <goals>
+              <goal>jar-no-fork</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
       <!-- INCLUDE JAVADOC JAR -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -83,7 +142,7 @@
         <version>3.4.0</version>
         <executions>
           <execution>
-            <id>attach-javadoc</id>
+            <id>attach-javadocs</id>
             <goals>
               <goal>jar</goal>
             </goals>
@@ -92,13 +151,14 @@
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-source-plugin</artifactId>
-        <version>3.2.1</version>
+        <artifactId>maven-gpg-plugin</artifactId>
+        <version>3.0.1</version>
         <executions>
           <execution>
-            <id>attach-source</id>
+            <id>sign-artifacts</id>
+            <phase>verify</phase>
             <goals>
-              <goal>jar</goal>
+              <goal>sign</goal>
             </goals>
           </execution>
         </executions>
