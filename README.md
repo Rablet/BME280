@@ -41,8 +41,12 @@ This is very heavily based on this with the main change being an upgrade to pi4j
 
 4.  Read data from the sensor:
 
-        BME280Data bme280Data = bme280.getBME280Data();
+        BME280Data data = bme280.getBME280Data();
 
 5.  Do whatever you want to do with the data:
 
-        LOG.debug("BME280 Sensor Data: Temp = {} C Humidity = {} %% Pressure 0 hPa {}", bme280Data.getTemperature(), bme280Data.getHumidity(), bme280Data.getPressure());
+        System.out.println("Data  = " + data.toString());
+
+        Sample output:
+
+        Data  = { temperature='27.533137437939878 °', humidity='48.78065766673965%', pressure='1012.6340525430045 hPa'}
