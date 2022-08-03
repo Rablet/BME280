@@ -22,7 +22,7 @@ This is very heavily based on this with the main change being an upgrade to pi4j
 
 3.  Create a BME280 instance:
 
-        BME280 bme280 = new BME280("linuxfs-i2c", "BME280", 1, 0x77);
+        BME280 bme280 = new BME280("linuxfs-i2c", "BME280", 1, 0x76);
 
 4.  Read data from the sensor:
 
