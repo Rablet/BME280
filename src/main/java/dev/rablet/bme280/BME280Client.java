@@ -1,4 +1,4 @@
-package dev.rablet;
+package dev.rablet.bme280;
 
 import java.io.IOException;
 
@@ -9,11 +9,13 @@ import com.pi4j.io.i2c.I2CConfig;
 import com.pi4j.io.i2c.I2CProvider;
 import com.pi4j.provider.exception.ProviderNotFoundException;
 
+import dev.rablet.bme280.model.BME280Data;
+
 /**
  * Used for reading data from a BME280 sensor.
  * Depends on the pi4j library.
  */
-public class BME280 {
+public class BME280Client {
     private I2CProvider i2CProvider;
     private I2CConfig i2cConfig;
 
@@ -25,7 +27,7 @@ public class BME280 {
      * * i2cBus = 1
      * * i2cDevice = 0x77
      */
-    public BME280() {
+    public BME280Client() {
         this("linuxfs-i2c", "BME280", 1, 0x77);
     }
 
@@ -39,7 +41,7 @@ public class BME280 {
      * 
      * @throws IllegalArgumentException if the provider does not exist
      */
-    public BME280(String provider, String configName, Integer i2cBus, Integer i2cDevice)
+    public BME280Client(String provider, String configName, Integer i2cBus, Integer i2cDevice)
             throws IllegalArgumentException {
         Context pi4j = Pi4J.newAutoContext();
         try {

@@ -1,4 +1,4 @@
-package dev.rablet;
+package dev.rablet.bme280.model;
 
 /**
  * Stores the temperature, humidity, and pressure information retrieved from a

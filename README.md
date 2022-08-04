@@ -1,10 +1,13 @@
 # BME280
 
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/dev.rablet/bme280/badge.svg)](https://maven-badges.herokuapp.com/maven-central/dev.rablet/bme280)
+[![License](https://img.shields.io/github/license/rablet/bme280)](http://www.apache.org/licenses/LICENSE-2.0)
+
 Library for reading a BME280 sensor on a Raspberry Pi.
 
 Uses pi4j2 under the hood (https://github.com/Pi4J/pi4j-v2).
 
-Prerequisites:
+## Prerequisites:
 
 - Raspberry Pi
 - BME280 sensor
@@ -12,14 +15,14 @@ Prerequisites:
 
 This is very heavily based on this with the main change being an upgrade to pi4j2: https://github.com/ControlEverythingCommunity/BME280/blob/master/Java/BME280.java
 
-## How to use?
+## Getting Started
 
 1.  Add the library as a dependency
 
         <dependency>
             <groupId>dev.rablet</groupId>
             <artifactId>bme280</artifactId>
-            <version>0.0.1</version>
+            <version>0.0.2</version>
         </dependency>
 
 2.  Find the i2cAddress of your BME280 sensor (below shows an example for 0x76):
@@ -37,7 +40,7 @@ This is very heavily based on this with the main change being an upgrade to pi4j
 
 3.  Create a BME280 instance:
 
-        BME280 bme280 = new BME280("linuxfs-i2c", "BME280", 1, 0x76);
+        BME280Client bme280 = new BME280Client("linuxfs-i2c", "BME280", 1, 0x76);
 
 4.  Read data from the sensor:
 

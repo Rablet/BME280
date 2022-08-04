@@ -5,7 +5,7 @@
 
   <groupId>dev.rablet</groupId>
   <artifactId>bme280</artifactId>
-  <version>0.0.1</version>
+  <version>0.0.2</version>
 
   <name>${project.groupId}:${project.artifactId}</name>
   <description>A library for reading data from a BME280 sensor</description>
@@ -106,7 +106,6 @@
           <artifactId>maven-project-info-reports-plugin</artifactId>
           <version>3.0.0</version>
         </plugin>
-
       </plugins>
     </pluginManagement>
     <plugins>
