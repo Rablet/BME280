@@ -15,9 +15,10 @@ import dev.rablet.bme280.model.BME280Data;
  * Used for reading data from a BME280 sensor.
  * Depends on the pi4j library.
  */
-public class BME280Client {
+public class BME280Client implements AutoCloseable {
     private I2CProvider i2CProvider;
     private I2CConfig i2cConfig;
+    private Context pi4j;
 
     /**
      * Creates an instance of BME280 which can be used to get sensor reads.
@@ -43,7 +44,7 @@ public class BME280Client {
      */
     public BME280Client(String provider, String configName, Integer i2cBus, Integer i2cDevice)
             throws IllegalArgumentException {
-        Context pi4j = Pi4J.newAutoContext();
+        pi4j = Pi4J.newAutoContext();
         try {
             this.i2CProvider = pi4j.provider("linuxfs-i2c");
         } catch (ProviderNotFoundException e) {
@@ -60,6 +61,7 @@ public class BME280Client {
      */
     public BME280Data getBME280Data() throws IOException {
         try (I2C tca9534Dev = i2CProvider.create(i2cConfig)) {
+
             int readRegisterResult;
             // Read 24 bytes of data from address 0x88(136)
             byte[] b1 = new byte[24];
@@ -207,6 +209,11 @@ public class BME280Client {
         }
     }
 
+    public void closeSensor() {
+        i2CProvider.shutdown(pi4j);
+        pi4j.shutdown();
+    }
+
     /**
      * Checks if the result of reading from register indicates failure.
      * 
@@ -217,5 +224,10 @@ public class BME280Client {
         if (readRegisterResult < 0) {
             throw new IOException("Could not read from i2c device");
         }
+    }
+
+    @Override
+    public void close() throws Exception {
+        closeSensor();
     }
 }
